@@ -1,0 +1,102 @@
+<section class="layout-pt-md layout-pb-md bg-dark-2">
+    <div class="container">
+        <div class="row y-gap-30 justify-between items-center">
+            <div class="col-auto">
+                <div class="row y-gap-20  flex-wrap items-center">
+                    <div class="col-auto">
+                        <div class="icon-newsletter text-60 sm:text-40 text-white"></div>
+                    </div>
+
+                    <div class="col-auto">
+                        <h4 class="text-26 text-white fw-600">Your Travel Journey Starts Here</h4>
+                        <div class="text-white">Sign up and we'll send the best deals to you</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-auto">
+                <div class="single-field -w-410 d-flex x-gap-10 y-gap-20">
+                    <div>
+                        <input class="bg-white h-60" type="text" placeholder="Your Email">
+                    </div>
+
+                    <div>
+                        <button class="button -md h-60 bg-blue-1 text-white">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer -type-1">
+    <div class="container">
+        <div class="pt-60 pb-60">
+            <div class="row y-gap-40 justify-between xl:justify-start">
+                <div class="col-xl-2 col-lg-4 col-sm-6">
+                    <h5 class="text-16 fw-500 mb-30">Contact Us</h5>
+
+                    <div class="mt-30">
+                        <div class="text-14 mt-30">Need call support?</div>
+                        <a href="tel:919045119925" class="text-18 fw-500 text-blue-1 mt-5">+91-90451-19925</a>
+                    </div>
+
+                    <div class="mt-35">
+                        <div class="text-14 mt-30">Need live support?</div>
+                        <a href="mailto:info@trigoyo.com" class="text-18 fw-500 text-blue-1 mt-5">info@trigoyo.com</a>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-lg-4 col-sm-6">
+                    <h5 class="text-16 fw-500 mb-30">Destinations</h5>
+                    <div class="d-flex y-gap-10 flex-column">
+                        <a [routerLink]="['/india/state', item.name]" *ngFor="let item of stateList">{{item.name}}</a>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-2 col-lg-4 col-sm-6">
+                    <h5 class="text-16 fw-500 mb-30">Support</h5>
+                    <div class="d-flex y-gap-10 flex-column">
+                        <a [routerLink]="['/']">Home</a>
+                        <a [routerLink]="['/contact']">Contact</a>
+                        <a [routerLink]="['/about']">About</a>
+                        <a [routerLink]="['/blogs']">Blogs</a>
+                        <a [routerLink]="['/destinations']">Destinations</a>
+                        <a [routerLink]="['/tour/packages']">Tour Packages</a>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-lg-4 col-sm-6">
+                    <h5 class="text-16 fw-500 mb-30">Tour Packages</h5>
+
+                    <div class="d-flex y-gap-10 flex-column">
+                        <a [routerLink]="['/tour/package/', item?._id]" *ngFor="let item of tourPackageArr">{{item?.packageName}}</a>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-lg-4 col-sm-6">
+                    <h5 class="text-16 fw-500 mb-30">Social</h5>
+                    <div class="col-auto">
+                        <div class="d-flex x-gap-20 items-center">
+                            <a href="https://www.facebook.com/Trigoyo-434691423958652" target="_blank"><i class="fa-brands fa-facebook text-14"></i></a>
+                            <a href="https://twitter.com/Trigoyo1" target="_blank"><i class="fa-brands fa-twitter text-14"></i></a>
+                            <a href="https://www.instagram.com/trigoyo/?hl=en"><i class="fa-brands fa-instagram text-14"></i></a>
+                            <a href=" https://www.youtube.com/channel/UCUIJTAry3iqgiESkY9d6h4w/featured" target="_blank"><i class="fa-brands fa-youtube text-14"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="py-20 border-top-light">
+            <div class="row text-center">
+                <div class="col">
+                    © 2022 Trigoyo | All rights reserved.
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

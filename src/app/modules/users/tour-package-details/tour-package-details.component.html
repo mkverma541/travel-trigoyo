@@ -1,0 +1,172 @@
+<app-user-layout>
+    <router-outlet>
+        <section class="mt-80">
+            <div class="container-fluid  p-0">
+                <div class="row">
+                    <owl-carousel-o [options]="customOptions">
+                        <ng-template carouselSlide *ngFor="let img of packageDetails?.gallery">
+                            <img [src]="env.host + env.filePath + img">
+                        </ng-template>
+                    </owl-carousel-o>
+                </div>
+                <div class="relative d-flex justify-center js-section-slider" data-gap="10" data-slider-cols="xl-2 lg-2 base-1" data-nav-prev="js-img-prev" data-nav-next="js-img-next" data-loop>
+
+                    <!-- 
+                    <div class="absolute h-full col-12 px-20 py-20 d-flex justify-end items-end">
+                        <a href="img/lists/activity/single/1.png" class="button -blue-1 px-24 py-15 bg-white text-dark-1 z-2 js-gallery" data-gallery="gallery2">
+              See All 90 Photos
+            </a>
+                        <a href="img/lists/activity/single/2.png" class="js-gallery" data-gallery="gallery2"></a>
+                        <a href="img/lists/activity/single/3.png" class="js-gallery" data-gallery="gallery2"></a>
+                        <a href="img/lists/activity/single/4.png" class="js-gallery" data-gallery="gallery2"></a>
+                    </div> -->
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="row y-gap-30">
+                    <div class="col-lg-8">
+                        <div class="row justify-between items-end">
+                            <div class="col-auto">
+                                <h1 class="text-26 fw-600"></h1>
+
+                                <div class="row x-gap-10 y-gap-20 items-center pt-10">
+                                    <div class="col-auto">
+                                        <div class="row x-gap-10 items-center">
+                                            <div class="col-auto">
+                                                <h3 class="text-22 fw-500 mt-30">
+                                                    {{packageDetails?.packageName}} - {{packageDetails?.tourNights}}Nights/{{packageDetails?.tourDays}}Days
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-auto">
+                                <div class="row x-gap-10 y-gap-10">
+                                    <div class="col-auto">
+                                        <button class="button px-15 py-10 -blue-1">
+                      <i class="icon-share mr-10"></i>
+                      Share
+                    </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-top-light mt-40 mb-40"></div>
+
+                        <div class="col-12">
+                            <h3 class="text-22 fw-500">Best Facilities</h3>
+                            <div class="row y-gap-10 pt-20">
+                                <div class="col-md-5" *ngFor="let option of packageDetails?.facilities">
+                                    <div class="d-flex x-gap-15 y-gap-15 items-center">
+                                        <img [src]="env.host + env.filePath + option?.icon" style="width: 35px">
+                                        <div class="text-15">{{option?.name}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <ng-container>
+                            <div class="border-top-light mt-40 mb-40"></div>
+                            <div class="col-12" *ngIf="packageDetails?.description !== null">
+                                <h3 class="text-22 fw-500">Overview</h3>
+                                <div class="text-dark-1 text-15 mt-20" [innerHTML]="packageDetails?.description">
+                                </div>
+                            </div>
+                        </ng-container>
+
+
+                        <div class="row x-gap-40 y-gap-20">
+                            <!--- Itinerary-->
+                            <div class="col-12">
+                                <h3 class="text-22 fw-500">Itinerary</h3>
+                                <div class="relative mt-40">
+                                    <div class="border-test"></div>
+                                    <div class="row y-gap-20">
+                                        <div class="col-12" *ngFor="let item1 of packageDetails?.itinerary; index as i">
+                                            <div>
+                                                <div class="d-flex">
+                                                    <div class="size-40 flex-center bg-blue-2 text-blue-1 rounded-full">
+                                                        <div class="text-14 fw-500">{{i + 1}}</div>
+                                                    </div>
+                                                    <div class="ml-20">
+                                                        <div class="text-16 lh-15 fw-500">{{item1.day}} : {{item1?.heading}}</div>
+                                                        <div class="mt-5">{{item1?.overview}} </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border-top mt-60"></div>
+
+                            <div class="accordion mb-40">
+                                <div>
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#inclusions">
+                                      Inclusions
+                                    </button>
+                                    </h2>
+                                    <div id="inclusions" class="accordion-collapse collapse">
+                                        <div class="accordion-body" [innerHTML]="packageDetails?.inclusions"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#exclusion">
+                                            Exclusion
+                                    </button>
+                                    </h2>
+                                    <div id="exclusion" class="accordion-collapse collapse">
+                                        <div class="accordion-body" [innerHTML]="packageDetails?.exclusion"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#cancelPolicy">
+                                        Cancellation Policy
+                                </button>
+                                    </h2>
+                                    <div id="cancelPolicy" class="accordion-collapse collapse">
+                                        <div class="accordion-body" [innerHTML]="packageDetails?.cancellationPolicy"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 class="accordion-header border-bottom-0" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#importantNotes">
+                                        Important Notes
+                                </button>
+                                    </h2>
+                                    <div id="importantNotes" class="accordion-collapse collapse">
+                                        <div class="accordion-body" [innerHTML]="packageDetails?.importantNotes"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--sidebar-->
+                    <div class="col-lg-4">
+
+                        <app-sidewar-widget></app-sidewar-widget>
+                        <div class="ml-50 lg:ml-0">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <app-latest-blog-post></app-latest-blog-post>
+
+    </router-outlet>
+</app-user-layout>

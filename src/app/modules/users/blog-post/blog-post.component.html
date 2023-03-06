@@ -1,0 +1,140 @@
+<app-user-layout>
+    <router-outlet>
+        <main>
+
+            <section class="section-bg layout-pt-lg layout-pb-md page-banner overlay">
+                <div class="section-bg__item col-12">
+                    <img src="https://img.freepik.com/free-photo/beautiful-girl-standing-viewpoint-koh-nangyuan-island-near-koh-tao-island-surat-thani-thailand_335224-1094.jpg?w=1060&t=st=1677331235~exp=1677331835~hmac=66c3df77f4b5081f35e7584e0ceef2a2b42cc92bc9d6ea9b6b0107b81800c392"
+                        alt="image">
+                </div>
+
+                <div class="container">
+                    <div class="row justify-center text-center">
+                        <div class="col-xl-6 col-lg-8 col-md-10">
+                            <h1 class="text-40 md:text-25 fw-600 text-white mb-15">Blogs</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <app-page-nav></app-page-nav>
+
+
+
+            <section class="layout-pt-md">
+                <div class="container">
+                    <div class="row justify-center text-center">
+                        <div class="col-auto">
+                            <div class="sectionTitle -md">
+                                <h2 class="sectionTitle__title">Travel articles</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="layout-pt-md layout-pb-lg">
+                <div class="container">
+                    <div class="row y-gap-30 justify-between">
+                        <div class="col-xl-8">
+                            <div class="row y-gap-30">
+
+                                <a [routerLink]="['/blogs/', item?.slug]" class="blogCard -type-1 col-12" *ngFor="let item of postList">
+                                    <div class="row y-gap-15 items-center md:justify-center md:text-center">
+                                        <div class="col-auto">
+                                            <div class="blogCard__image rounded-4">
+                                                <div class="ratio ratio-1:1 w-250">
+                                                    <img [src]="env.host + env.filePath + item.featuredImage" alt="image" class="img-ratio rounded-4">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md">
+                                            <div class="text-15 text-light-1">{{item.createdAt | date : 'medium'}}</div>
+
+                                            <h3 class="text-22 text-dark-1 mt-10 md:mt-5">
+                                                {{item.title}}
+                                            </h3>
+
+                                            <div class="text-15 lh-16 text-light-1 mt-10 md:mt-5">{{item.excerpt}} </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-xl-3">
+                            <div class="sidebar -blog">
+                                <div class="sidebar__item -no-border">
+                                    <h5 class="text-18 fw-500 mb-10">Search</h5>
+                                    <div class="single-field relative d-flex items-center py-10">
+                                        <input class="pl-50 border-light text-dark-1 h-50 rounded-8" type="email" placeholder="Search">
+                                        <button class="absolute d-flex items-center h-full">
+                    <i class="icon-search text-20 px-15 text-dark-1"></i>
+                  </button>
+                                    </div>
+                                </div>
+
+                                <div class="sidebar__item">
+                                    <h5 class="text-18 fw-500 mb-10">Categories</h5>
+
+                                    <div class="y-gap-5">
+
+                                        <a class="d-flex items-center justify-between text-dark-1" *ngFor="let category of categories">
+                                            <span class="text-15 text-dark-1">{{category.name}}</span>
+                                        </a>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="sidebar__item">
+                                    <h5 class="text-18 fw-500 mb-10">Recent Posts</h5>
+
+                                    <div class="row y-gap-20 pt-10">
+
+                                        <div class="col-12" [routerLink]="['/blog', item.slug]" *ngFor="let item of postList">
+                                            <div class="d-flex items-center">
+                                                <img class="size-65 rounded-8" [src]="env.host + env.filePath + item.featuredImage" alt="image">
+                                                <div class="ml-15">
+                                                    <h5 class="text-15 lh-15 fw-500">{{item.title}}</h5>
+                                                    <div class="text-13 lh-1 mt-5">{{item.createdAt | date : 'medium'}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="sidebar__item">
+                                    <h5 class="text-18 fw-500 mb-10">Tags</h5>
+
+                                    <div class="row x-gap-10 y-gap-10 pt-10">
+
+                                        <div class="col-auto">
+                                            <a href="#" class="button -blue-1 py-5 px-20 bg-blue-1-05 rounded-100 text-15 fw-500 text-blue-1">Museum</a>
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <a href="#" class="button -blue-1 py-5 px-20 bg-blue-1-05 rounded-100 text-15 fw-500 text-blue-1">Park</a>
+                                        </div>
+
+                                        <div class="col-auto">
+                                            <a href="#" class="button -blue-1 py-5 px-20 bg-blue-1-05 rounded-100 text-15 fw-500 text-blue-1">Beach</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </router-outlet>

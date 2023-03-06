@@ -1,0 +1,166 @@
+<app-admin-layout>
+    <router-outlet>
+        <div class="dashboard" data-x="dashboard" data-x-toggle="-is-sidebar-open">
+            <div class="dashboard__sidebar bg-white scroll-bar-1">
+                <app-admin-sidebar></app-admin-sidebar>
+            </div>
+            <div class="dashboard__main">
+                <div class="dashboard__content bg-light-2">
+                    <div class="row y-gap-20 justify-between items-end pb-30 lg:pb-40 md:pb-32">
+                        <div class="col-auto">
+                            <h1 class="text-25 lh-14 fw-600">{{isEdit ? 'Edit' : 'Add'}} New Post</h1>
+                        </div>
+                        <div class="col-auto"></div>
+                    </div>
+
+                    <form [formGroup]="addPostForm">
+                        <div class="row py-30 px-30 rounded-4 bg-white shadow-3">
+                            <div class="col-md-9">
+                                <nav>
+                                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Basic</button>
+                                        <button class="nav-link" id="nav-gallery-tab" data-bs-toggle="tab" data-bs-target="#nav-gallery" type="button" role="tab" aria-controls="nav-gallery" aria-selected="false">Galley</button>
+                                        <button class="nav-link" id="nav-seo-tab" data-bs-toggle="tab" data-bs-target="#nav-seo" type="button" role="tab" aria-controls="nav-seo" aria-selected="false">SEO</button>
+                                    </div>
+                                </nav>
+                                <div class="tab-content mt-5 pt-5" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                                        <div class="row x-gap-20 y-gap-20">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Title</label>
+                                                    <input type="text" formControlName="title">
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Description</label>
+                                                    <quill-editor class="content-editor" [placeholder]="''" formControlName="content"> </quill-editor>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Excerpt</label>
+                                                    <textarea required rows="5" formControlName="excerpt"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Category</label>
+                                                    <select class="form-control" formControlName="category">
+                                                            <option [value]="category._id" *ngFor="let category of categories">{{category.name}}</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Tags</label>
+                                                    <select class="form-control" formControlName="tags">
+                                                            <option [value]="tag._id" *ngFor="let tag of tags">{{tag?.name}}</option>
+                                                        </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab" tabindex="0">
+                                        <div class="row x-gap-20 y-gap-20 pt-15">
+                                            <div class="col-auto">
+                                                <div class="w-200">
+                                                    <div class="d-flex ratio ratio-1:1 file-upload">
+                                                        <div class="flex-center flex-column text-center bg-blue-2 h-full w-1/1 absolute rounded-4 border-type-1">
+                                                            <div class="fa-solid fa-upload text-18 text-blue-1 mb-10"></div>
+                                                            <div class="text-blue-1 fw-500">Upload Images</div>
+                                                            <input #fileUpload type="file" (change)="uploadGalleryImage($event)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <ng-container *ngIf="galleryImages.length > 0">
+                                                <div class="col-auto" *ngFor="let img of galleryImages; index as i">
+                                                    <div class="d-flex ratio ratio-1:1 w-200">
+                                                        <img [src]="env.host + env.filePath + img" alt="image" class="img-ratio rounded-4">
+                                                        <div class="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute">
+                                                            <div class="size-40  rounded-4 delete-img" (click)="deleteGalleyImg(i)">
+                                                                <i class="icon-trash text-16"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab" tabindex="0">
+                                        <div formGroupName="seo">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label>Meta Title</label>
+                                                    <input type="text" formControlName="title">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-5">
+                                                <div class="form-group">
+                                                    <label>Meta Description</label>
+                                                    <textarea required rows="2" formControlName="description"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 mt-5">
+                                                <div class="form-group">
+                                                    <label>Meta Keywords</label>
+                                                    <textarea required rows="2" formControlName="keywords"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="mt-30" style="position: sticky; top: 0;">
+                                    <div class="fw-500">Featured Image</div>
+                                    <!-- upload photo-->
+                                    <div class="row x-gap-20 y-gap-20 pt-15" *ngIf="featuredImage == null">
+                                        <div class="col-auto">
+                                            <div class="w-200">
+                                                <div class="d-flex ratio ratio-1:1 file-upload">
+                                                    <div class="flex-center flex-column text-center bg-blue-2 h-full w-1/1 absolute rounded-4 border-type-1">
+                                                        <input #fileUpload type="file" (change)="selectFile($event)">
+                                                        <div class="icon-upload-file text-40 text-blue-1 mb-10"></div>
+                                                        <div class="text-blue-1 fw-500">Upload Images</div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center mt-10 text-14 text-light-1">PNG or JPG no bigger than 800px wide and tall.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- uploaded photo-->
+                                    <div class="col-auto" *ngIf="featuredImage != null">
+                                        <div class="d-flex ratio ratio-1:1 w-200">
+                                            <img [src]="env.host + env.filePath + featuredImage" alt="image" class="img-ratio rounded-4">
+                                            <div class="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute">
+                                                <div class="size-40 rounded-4 delete-img cursor" (click)="deleteFeaturedImg()">
+                                                    <i class="icon-trash text-16"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="d-inline-block pt-30">
+                                    <a class="button h-50 px-24 -dark-1 bg-blue-1 text-white" (click)="onSubmit()" *ngIf="!isEdit"> Publish Post <div class="icon-arrow-top-right ml-15"></div>
+                                    </a>
+
+                                    <a class="button h-50 px-24 -dark-1 bg-blue-1 text-white" (click)="onUpdate()" *ngIf="isEdit"> Save changes <div class="icon-arrow-top-right ml-15"></div>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <app-admin-footer></app-admin-footer>
+                </div>
+            </div>
+        </div>
+    </router-outlet>
+</app-admin-layout>

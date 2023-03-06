@@ -1,0 +1,199 @@
+<app-user-layout>
+    <router-outlet>
+        <main>
+            <section class="section-bg layout-pt-lg layout-pb-md page-banner overlay">
+                <div class="section-bg__item col-12">
+                    <img src="https://img.freepik.com/free-photo/beautiful-girl-standing-viewpoint-koh-nangyuan-island-near-koh-tao-island-surat-thani-thailand_335224-1094.jpg?w=1060&t=st=1677331235~exp=1677331835~hmac=66c3df77f4b5081f35e7584e0ceef2a2b42cc92bc9d6ea9b6b0107b81800c392"
+                        alt="image">
+                </div>
+
+                <div class="container">
+                    <div class="row justify-center text-center">
+                        <div class="col-xl-6 col-lg-8 col-md-10">
+                            <h1 class="text-40 md:text-25 fw-600 text-white mb-15">Tour Packages</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <app-page-nav></app-page-nav>
+
+
+            <section class="layout-pt-md layout-pb">
+                <div class="container">
+                    <div class="row ">
+                        <!-- <div class="col-xl-2 col-lg-2 lg:d-none  mt-10">
+                            <aside class="sidebar y-gap-40">
+
+                                <div class="sidebar__item -no-border">
+                                    <h5 class="text-18 fw-500 mb-10">Destinations</h5>
+                                    <div class="sidebar-checkbox">
+                                        <div class="row y-gap-10 items-center justify-between" *ngFor="let d of destinations">
+                                            <div class="col-auto" [routerLink]="['/tour/packages/destinations/', d?._id]" [queryParams]="{dest: d?.name}">
+                                                <div class="d-flex items-center">
+                                                    <div class="text-15">{{d.name}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sidebar__item">
+                                    <h5 class="text-18 fw-500 mb-10">Categories</h5>
+                                    <div class="sidebar-checkbox">
+
+                                        <div class="row y-gap-10 items-center justify-between" *ngFor="let category of tourCategories">
+                                            <div class="col-auto">
+
+                                                <div class="text-15 ">{{category?.name}}</div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </aside>
+                        </div> -->
+
+                        <div class="col">
+                            <div class="row x-gap-20 y-gap-20 tour-card-list" *ngFor="let item of packageList">
+                                <div class="col-md-3">
+                                    <div class="cardImage ratio ratio-1:1 w-250 md:w-1/1 rounded-4">
+                                        <div class="cardImage__content">
+                                            <img class="rounded-4 col-12 js-lazy" [src]="env.host + env.filePath +  item.featuredImage" alt="image">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h3 class="text-18 lh-16 fw-500">{{item?.packageName}}</h3>
+
+                                    <div class="row x-gap-30 items-center center">
+                                        <div class="col-auto">
+                                            <p class="text-14">
+                                                <span><img src="assets/img/icons/clock.png" class="img-fluid me-2" width="18px"></span> {{item.tourNights}} Nights {{item.tourDays}} Days
+                                            </p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <p class="text-14">
+                                                <span><img src="assets/img/icons/pin.png" class="img-fluid me-2" width="18px"></span> {{item?.destination?.name}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <!-- <div class="placeTimeline">
+                                                <div>
+                                                    <div *ngFor="let place of item?.travelDestinations">
+                                                        {{place}}
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                    <div class="text-12 mt-10">Customized Holidays</div>
+                                    <div class="row x-gap-30 y-gap-10 ">
+                                        <div class="col-auto tour-inclusive" *ngFor="let option of item?.facilities">
+                                            <div class="icon">
+                                                <img [src]="env.host + env.filePath + option?.icon" class="img-fluid w-20">
+                                            </div>
+                                            <div>{{option?.name}}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 text-right md:text-left border-left-sep">
+                                    <div class="text-14 text-light-1 mt-50 md:mt-20">From</div>
+                                    <div class="text-22 lh-12 fw-600 mt-5">₹ {{item?.price}}</div>
+                                    <div class="text-14 text-light-1 mt-5">starting price per adult</div>
+                                    <div class="btn-wrap">
+                                        <a [routerLink]="['/tour/package', item?._id]" class="button  -dark-1 bg-blue-1 text-white mt-24">View Detail</a>
+                                        <a class="button -outline-blue-1 text-blue-1 mt-24" data-bs-toggle="modal" data-bs-target="#enquiryModal">Enquiry Now</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <app-latest-blog-post></app-latest-blog-post>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="enquiryModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #modal></button>
+                            <div class="row px-30 py-20 wrap-reverse">
+                                <div class="col-md-5">
+                                    <div class="wrap">
+                                        <img src="assets/images/vertical-poster.png">
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="pt-20">
+                                        <div class="text-20 fw-500 lh-14">
+                                            Upto 50% Off on All Tour Packages
+                                        </div>
+                                        <form [formGroup]="contactForm">
+                                            <div class="row y-gap-15 pt-20">
+                                                <div class="col-12">
+
+                                                    <div class="form-input ">
+                                                        <input type="text" formControlName="name">
+                                                        <label class="lh-1 text-light-1">Full Name</label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-12">
+
+                                                    <div class="form-input ">
+                                                        <input type="text" formControlName="email">
+                                                        <label class="lh-1  text-light-1">Email</label>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-12">
+
+                                                    <div class="form-input ">
+                                                        <input type="text" formControlName="phone">
+                                                        <label class="lh-1  text-light-1">Phone </label>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-12">
+
+                                                    <div class="form-input ">
+                                                        <input type="text" formControlName="subject">
+                                                        <label class="lh-1 text-light-1">Subject</label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-12">
+
+                                                    <div class="form-input ">
+                                                        <textarea required="" rows="3" formControlName="message"></textarea>
+                                                        <label class="lh-1  text-light-1">Your Messages</label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-auto">
+
+                                                    <a (click)="onSubmit()" class="button px-24 h-50 -dark-1 bg-blue-1 text-white">
+                                    Send a Messsage <div class="icon-arrow-top-right ml-15"></div>
+                                  </a>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </router-outlet>
+</app-user-layout>

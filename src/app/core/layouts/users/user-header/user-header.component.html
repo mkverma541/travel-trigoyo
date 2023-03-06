@@ -1,0 +1,122 @@
+<header [class.scrolled]="isHeaderSticky || currentPage === 'contact' || currentPage === 'home'">
+
+    <div>
+        <div class="row justify-between items-center">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary  transparent-header">
+                <div class="container">
+                    <a [routerLink]="['/']" class="header-logo mr-20">
+                        <img src="assets/images/logo-dark.svg" alt="logo icon" width="100px">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="assets/images/menu.png" class="img-fluid" width="27px">
+                  </button>
+                    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li>
+                                <a (click)="navigateToPage('')">Home</a>
+                            </li>
+                            <li>
+                                <a (click)="navigateToPage('about-us')">About</a>
+                            </li>
+                            <li>
+                                <a (click)="navigateToPage('destinations')">Destinations</a>
+                            </li>
+                            <li>
+                                <a (click)="navigateToPage('tour')">Tour Packages</a>
+                            </li>
+                            <li>
+                                <a (click)="navigateToPage('blogs')">Blogs</a>
+                            </li>
+                            <li>
+                                <a (click)="navigateToPage('contact')">Contact</a>
+                            </li>
+
+                        </ul>
+                        <div class="d-flex">
+                            <a class="button px-30 fw-400 text-14 -blue-1 bg-blue-1 h-50 text-white" data-bs-toggle="modal" data-bs-target="#enquiryModal">Enquiry Now </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+
+<!-- Modal -->
+<div class="modal fade" id="enquiryModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #modal></button>
+                <div class="row px-30 py-20 wrap-reverse">
+                    <div class="col-md-5">
+                        <div class="wrap">
+                            <img src="assets/images/vertical-poster.png">
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="pt-20">
+                            <div class="text-20 fw-500 lh-14">
+                                Upto 50% Off on All Tour Packages
+                            </div>
+                            <form [formGroup]="contactForm">
+                                <div class="row y-gap-15 pt-20">
+                                    <div class="col-12">
+
+                                        <div class="form-input ">
+                                            <input type="text" formControlName="name">
+                                            <label class="lh-1 text-light-1">Full Name</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12">
+
+                                        <div class="form-input ">
+                                            <input type="text" formControlName="email">
+                                            <label class="lh-1  text-light-1">Email</label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-12">
+
+                                        <div class="form-input ">
+                                            <input type="text" formControlName="phone">
+                                            <label class="lh-1  text-light-1">Phone </label>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-12">
+
+                                        <div class="form-input ">
+                                            <input type="text" formControlName="subject">
+                                            <label class="lh-1 text-light-1">Subject</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-12">
+
+                                        <div class="form-input ">
+                                            <textarea required="" rows="3" formControlName="message"></textarea>
+                                            <label class="lh-1  text-light-1">Your Messages</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-auto">
+
+                                        <a (click)="onSubmit()" class="button px-24 h-50 -dark-1 bg-blue-1 text-white">
+                                    Send a Messsage <div class="icon-arrow-top-right ml-15"></div>
+                                  </a>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

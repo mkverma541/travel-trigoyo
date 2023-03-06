@@ -1,0 +1,69 @@
+<app-admin-layout>
+    <router-outlet>
+        <div class="dashboard" data-x="dashboard" data-x-toggle="-is-sidebar-open">
+            <div class="dashboard__sidebar bg-white scroll-bar-1">
+                <app-admin-sidebar></app-admin-sidebar>
+            </div>
+            <div class="dashboard__main">
+                <div class="dashboard__content bg-light-2">
+                    <div class="row y-gap-20 justify-between items-end pb-30 lg:pb-40 md:pb-32">
+                        <div class="col-auto">
+                            <h1 class="text-25 lh-14 fw-600">Categories</h1>
+                        </div>
+                        <div class="col-auto">
+                            <a [routerLink]="['/admin/blogs/categories/add']" class="button h-50 px-24 -dark-1 bg-blue-1 text-white"> Add Category <div class="icon-arrow-top-right ml-15"></div>
+                </a>
+                        </div>
+                    </div>
+                    <div class="py-30 px-30 rounded-4 bg-white shadow-3">
+                        <div class="tabs -underline-2 js-tabs">
+                            <div class="tabs__content pt-30 js-tabs-content">
+                                <div class="tabs__pane -tab-item-1 is-tab-el-active">
+                                    <div class="row y-gap-20">
+                                        <div class="col-12" *ngFor="let item of categories">
+                                            <div class="">
+                                                <div class="row x-gap-20 y-gap-30">
+                                                    <div class="col-md-auto">
+                                                        <div class="cardImage rounded-4 ws-100 hs-100">
+                                                            <div class="cardImage__content">
+                                                                <img class="rounded-4 col-12 js-lazy" [src]="env.host + env.filePath + item.image" alt="image">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md">
+                                                        <h3 class="text-18 lh-14 fw-500">{{item.name}}</h3>
+                                                        <div class="row x-gap-10 y-gap-10 items-center pt-20">
+                                                            <div class="col-auto">
+                                                                <div class="text-14" [innerHTML]="item?.desc"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-auto text-right md:text-left">
+                                                        <div class="d-flex flex-column justify-between h-full">
+                                                            <div class="row x-gap-10 y-gap-10 justify-end items-center md:justify-start">
+                                                                <div class="col-auto">
+                                                                    <a [routerLink]="['/admin/blogs/edit', item?._id]" class="action-btn edit"> Edit </a>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a class="action-btn delete" (click)="deleteItem(item?._id)"> Delete </a>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <a [routerLink]="['/blog/', item?._id]" target="_blank" class="action-btn view"> View </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <app-admin-footer></app-admin-footer>
+                </div>
+            </div>
+        </div>
+    </router-outlet>
+</app-admin-layout>

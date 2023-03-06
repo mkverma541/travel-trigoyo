@@ -1,0 +1,92 @@
+<app-admin-layout>
+    <router-outlet>
+
+
+
+        <div class="dashboard" data-x="dashboard" data-x-toggle="-is-sidebar-open">
+            <div class="dashboard__sidebar bg-white scroll-bar-1">
+
+
+                <app-admin-sidebar></app-admin-sidebar>
+
+            </div>
+
+            <div class="dashboard__main">
+                <div class="dashboard__content bg-light-2">
+                    <div class="row y-gap-20 justify-between items-end pb-20 lg:pb-40 md:pb-32">
+                        <div class="col-auto">
+
+                            <h1 class="text-25 lh-14 fw-600">Tour Categories</h1>
+
+                        </div>
+
+                        <div class="col-auto">
+
+                            <a class="button h-50 px-24 -dark-1 bg-blue-1 text-white" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Add Category 
+                              </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="py-30 px-30 rounded-4 bg-white shadow-3">
+                        <div class="row y-gap-30">
+                            <div class="overflow-scroll scroll-bar-1">
+                                <table class="table-3 -border-bottom col-12">
+                                    <thead class="bg-light-2">
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Name</th>
+                                            <th>Created Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr *ngFor="let item of categories; index as i">
+                                            <td>{{i +1 }}</td>
+                                            <td>{{item?.name }}</td>
+                                            <th>{{item?.updatedAt | date: 'medium' }}</th>
+                                            <td>
+                                                <div class="position-relative" (click)="deleteItem(item?._id)">
+                                                    <div class="size-40  rounded-4 delete-img">
+                                                        <i class="fa-solid fa-trash text-16"></i>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                    <app-admin-footer></app-admin-footer>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" style="max-width:400px">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h3 class="heading">Add Category</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closeModal></button>
+                        <form [formGroup]="addCategoryForm">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" formControlName="name">
+                            </div>
+                            <button type="button" class="btn btn-primary w-100" (click)="onSubmitCategory()" [disabled]="!addCategoryForm.valid">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </router-outlet>
+</app-admin-layout>

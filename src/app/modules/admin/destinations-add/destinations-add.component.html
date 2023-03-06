@@ -1,0 +1,120 @@
+<app-admin-layout>
+    <router-outlet>
+        <div class="dashboard" data-x="dashboard" data-x-toggle="-is-sidebar-open">
+            <div class="dashboard__sidebar bg-white scroll-bar-1">
+                <app-admin-sidebar></app-admin-sidebar>
+            </div>
+            <div class="dashboard__main">
+                <div class="dashboard__content bg-light-2">
+                    <div class="row y-gap-20 justify-between items-end pb-30 lg:pb-40 md:pb-32">
+                        <div class="col-auto">
+                            <h1 class="text-25 lh-14 fw-600">{{isEdit ? 'Edit' : 'Add'}} Destination</h1>
+                        </div>
+                        <div class="col-auto"></div>
+                    </div>
+                    <form [formGroup]="addDestinationForm">
+                        <div class="row py-30 px-30 rounded-4 bg-white shadow-3">
+                            <div class="col-xl-9">
+                                <div class="row x-gap-20 y-gap-20">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="lh-1 text-16 text-light-1">Name</label>
+                                            <input type="text" formControlName="name">
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="lh-1 text-16 text-light-1">State</label>
+                                            <select class="form-control" formControlName="state">
+                                                <option>Select</option>
+                                                <option [value]="state._id" *ngFor="let state of states">
+                                                    {{state.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label class="lh-1 text-16 text-light-1">Description</label>
+                                            <!-- <quill-editor [(ngModel)]="content" trackChanges="all" [modules]="modules" formControlName="overview">
+                                            </quill-editor> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-30">
+                                        <div class="fw-500">Cover Image</div>
+                                        <div class="row x-gap-20 y-gap-20 pt-15">
+                                            <div class="col-auto" *ngIf="coverImage == null">
+                                                <div class="w-200">
+                                                    <div class="d-flex ratio ratio-1:1 file-upload">
+                                                        <div class="flex-center flex-column text-center bg-blue-2 h-full w-1/1 absolute rounded-4 border-type-1">
+                                                            <div class="icon-upload-file text-40 text-blue-1 mb-10">
+                                                                <i class="fa fa-trash"></i>
+                                                            </div>
+                                                            <div class="text-blue-1 fw-500">Upload Image</div>
+                                                            <input #fileUpload type="file" (change)="selectFile2($event)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto" *ngIf="coverImage != null">
+                                                <div class="d-flex ratio ratio-1:1 w-200">
+                                                    <img [src]="env.host + env.filePath + coverImage" alt="image" class="img-ratio rounded-4">
+                                                    <div class="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute">
+                                                        <div class="size-40  rounded-4 delete-img" (click)="deleteCoverImg()">
+                                                            <i class="fa fa-trash text-16"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="mt-30">
+                                    <div class="fw-500">Featured Image</div>
+                                    <!-- upload photo-->
+                                    <div class="row x-gap-20 y-gap-20 pt-15" *ngIf="featuredImage == null">
+                                        <div class="col-auto">
+                                            <div class="w-200">
+                                                <div class="d-flex ratio ratio-1:1 file-upload">
+                                                    <div class="flex-center flex-column text-center bg-blue-2 h-full w-1/1 absolute rounded-4 border-type-1">
+                                                        <input #fileUpload type="file" (change)="selectFile($event)">
+                                                        <div class="icon-upload-file text-40 text-blue-1 mb-10"></div>
+                                                        <div class="text-blue-1 fw-500">Upload Image</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- uploaded photo-->
+                                    <div class="col-auto" *ngIf="featuredImage != null">
+                                        <div class="d-flex ratio ratio-1:1 w-200">
+                                            <img [src]="env.host + env.filePath + featuredImage" alt="image" class="img-ratio rounded-4">
+                                            <div class="d-flex justify-end px-10 py-10 h-100 w-1/1 absolute">
+                                                <div class="size-40 rounded-4 delete-img " (click)="deleteFeaturedImg()">
+                                                    <i class="fa fa-trash text-16"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="d-inline-block pt-30">
+                                    <a class="button h-50 px-24 -dark-1 bg-blue-1 text-white" (click)="onSubmit()" *ngIf="!isEdit"> Submit <div class="icon-arrow-top-right ml-15"></div>
+                  </a>
+                                    <a class="button h-50 px-24 -dark-1 bg-blue-1 text-white" (click)="onUpdate()" *ngIf="isEdit"> Save Changes <div class="icon-arrow-top-right ml-15"></div>
+                  </a>
+                                </div>
+                            </div>
+                            <app-admin-footer></app-admin-footer>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </router-outlet>
+</app-admin-layout>

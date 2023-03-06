@@ -1,0 +1,107 @@
+<app-admin-layout>
+    <router-outlet>
+
+
+
+        <div class="dashboard" data-x="dashboard" data-x-toggle="-is-sidebar-open">
+            <div class="dashboard__sidebar bg-white scroll-bar-1">
+
+
+                <app-admin-sidebar></app-admin-sidebar>
+
+            </div>
+
+            <div class="dashboard__main">
+                <div class="dashboard__content bg-light-2">
+                    <div class="row y-gap-20 justify-between items-end pb-30 lg:pb-40 md:pb-32">
+                        <div class="col-auto">
+
+                            <h1 class="text-25 lh-14 fw-600">Tour Packages</h1>
+
+                        </div>
+
+                        <div class="col-auto">
+
+                            <a [routerLink]="['/admin/tour-package/add']" class="button h-50 px-24 -dark-1 bg-blue-1 text-white">
+                                Add Package <div class="icon-arrow-top-right ml-15"></div>
+                              </a>
+
+                        </div>
+                    </div>
+
+
+                    <div class="py-30 px-30 rounded-4 bg-white shadow-3">
+
+
+                        <div class="tabs -underline-2 js-tabs">
+
+                            <div class="tabs__content pt-30 js-tabs-content">
+
+                                <div class="tabs__pane -tab-item-1 is-tab-el-active">
+                                    <div class="row y-gap-20">
+
+                                        <div class="overflow-scroll scroll-bar-1">
+                                            <table class="table-3 -border-bottom col-12">
+                                                <thead class="bg-light-2">
+                                                    <tr>
+                                                        <th>Sr. No.</th>
+                                                        <th>Image</th>
+                                                        <th>Package Name</th>
+                                                        <th>State</th>
+                                                        <th>Destination</th>
+                                                        <th>Date</th>
+                                                        <th class="text-center">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr *ngFor="let item of packageList; index as i">
+                                                        <td>{{i +1 }}</td>
+                                                        <td><img [src]="env.host + env.filePath + item.featuredImage" class="img-fluid"></td>
+                                                        <td>{{item?.packageName}}</td>
+                                                        <td>{{item?.state?.name }}</td>
+                                                        <td>{{item?.destination?.name}}</td>
+                                                        <td>{{item?.createdAt | date : 'dd/MM/yyyy'}}</td>
+                                                        <td>
+                                                            <div class="d-flex">
+                                                                <div class="me-2">
+                                                                    <a [routerLink]="['/admin/tour-package/edit', item?._id]" class="action-btn edit">
+                                                                        <i class="fa fa-edit"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div class="me-2">
+                                                                    <a class="action-btn delete" (click)="deletePackage(item?._id)">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <div>
+                                                                    <a class="action-btn view" target="_blank" [routerLink]="['/tour/package/', item?._id]">
+                                                                        <i class="fa fa-eye"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <app-admin-footer></app-admin-footer>
+
+                </div>
+            </div>
+        </div>
+
+
+    </router-outlet>
+</app-admin-layout>

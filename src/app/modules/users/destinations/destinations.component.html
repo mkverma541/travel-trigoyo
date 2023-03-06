@@ -1,0 +1,134 @@
+<app-user-layout>
+    <router-outlet>
+
+        <main>
+            <section class="section-bg layout-pt-lg layout-pb-md page-banner overlay">
+                <div class="section-bg__item col-12">
+                    <img src="https://img.freepik.com/free-photo/beautiful-girl-standing-viewpoint-koh-nangyuan-island-near-koh-tao-island-surat-thani-thailand_335224-1094.jpg?w=1060&t=st=1677331235~exp=1677331835~hmac=66c3df77f4b5081f35e7584e0ceef2a2b42cc92bc9d6ea9b6b0107b81800c392"
+                        alt="image">
+                </div>
+
+                <div class="container">
+                    <div class="row justify-center text-center">
+                        <div class="col-xl-6 col-lg-8 col-md-10">
+                            <h1 class="text-40 md:text-25 fw-600 text-white mb-15">Destinations</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <app-page-nav></app-page-nav>
+
+            <section class="d-flex items-center py-30">
+                <div class="container">
+                    <div class="row y-gap-10 items-center justify-between">
+                        <div class="col-auto">
+                            <div class="row x-gap-10 y-gap-5 items-center text-14 text-light-1">
+                                <div class="col-auto">
+                                    <div class="">Home</div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="">></div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="">India</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-block">
+                                <div class="content" [class.active]="showContent">
+                                    <p>Welcome to the exotic land of India! With its diverse culture, rich heritage, and picturesque landscapes, India is a tourist's paradise. From the majestic Himalayas in the north to the sandy beaches of the south, India
+                                        has something to offer for every type of traveler. Let's take a look at some of the top tourist destinations in India.</p>
+                                    <ol>
+                                        <li>The Taj Mahal: The Taj Mahal, located in Agra, is one of the most famous landmarks in India. This stunning monument was built by Mughal Emperor Shah Jahan as a tribute to his beloved wife Mumtaz Mahal. The Taj Mahal
+                                            is considered to be the finest example of Mughal architecture and attracts millions of tourists every year.</li>
+                                        <li>Goa: Goa, known for its sandy beaches, palm trees, and vibrant nightlife, is a popular destination for tourists seeking a laid-back vacation. Goa is home to many Portuguese colonial structures, quaint villages,
+                                            and delicious seafood.
+                                        </li>
+                                        <li>Jaipur: Jaipur, also known as the "Pink City," is the capital of the state of Rajasthan and is famous for its rich history, culture, and stunning palaces. Some of the must-visit attractions in Jaipur include the
+                                            Hawa Mahal, City Palace, and Amer Fort.</li>
+                                        <li>Kerala: Kerala, also known as "God's Own Country," is a tropical paradise in the south of India. The state is famous for its backwaters, palm-lined beaches, and lush green hills. The hill station of Munnar, the
+                                            backwaters of Alleppey, and the beaches of Kovalam are some of the top attractions in Kerala.</li>
+                                        <li>Ladakh: Ladakh, located in the northernmost region of India, is known for its stunning landscapes and unique culture. This rugged terrain is home to snow-capped mountains, high-altitude deserts, and beautiful Buddhist
+                                            monasteries.
+                                        </li>
+                                    </ol>
+                                    <p>Apart from these destinations, India is home to many other beautiful places such as the Golden Temple in Amritsar, the beaches of Andaman and Nicobar Islands, the hill stations of Darjeeling and Shimla, and many more.</p>
+                                    <p>In addition to its beautiful destinations, India is also known for its delicious cuisine, colorful festivals, and warm hospitality. Indian food is diverse, flavorful, and offers a wide range of vegetarian and non-vegetarian
+                                        options. Festivals such as Diwali, Holi, and Durga Puja are celebrated with great fervor across the country.</p>
+                                    <p>In conclusion, India is a land of diversity, beauty, and cultural richness. Whether you are looking for adventure, relaxation, or cultural experiences, India has something to offer for everyone. So pack your bags, come
+                                        explore this beautiful country, and make memories that will last a lifetime.</p>
+                                </div>
+                                <div class="read-more" (click)="toggleContent()">
+                                    {{showContent ? 'Read Less' : 'Read More'}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="layout-pt-md layout-pb-md">
+                <div class="container">
+                    <div class="row y-gap-20 justify-between items-end">
+                        <div class="col-auto">
+                            <div class="sectionTitle -md">
+                                <h2 class="sectionTitle__title">Explore Famous Indian Destinations</h2>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row y-gap-30 pt-40 sm:pt-20">
+
+                        <div class="col-xl-3 col-lg-3 col-sm-6" *ngFor="let state of states ">
+
+                            <a [routerLink]="['/india/state', state?.name]" class="rentalCard -type-1 rounded-4 ">
+                                <div class="rentalCard__image">
+
+                                    <div class="cardImage ratio ratio-1:1">
+                                        <div class="cardImage__content rounded-10">
+
+                                            <img class="rounded-4 col-12 js-lazy loaded" [src]="env.host + env.filePath + state?.featuredImage " alt="image">
+
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="rentalCard__content mt-10">
+                                    <h4 class="rentalCard__title text-dark-1 text-18 lh-16 fw-500">
+                                        <span>{{state?.name}}</span>
+                                    </h4>
+
+                                </div>
+                            </a>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+
+
+
+            <app-latest-blog-post></app-latest-blog-post>
+
+
+
+        </main>
+    </router-outlet>
+</app-user-layout>

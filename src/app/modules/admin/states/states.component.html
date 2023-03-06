@@ -1,0 +1,94 @@
+<app-admin-layout>
+    <router-outlet>
+
+
+
+        <div class="dashboard" data-x="dashboard" data-x-toggle="-is-sidebar-open">
+            <div class="dashboard__sidebar bg-white scroll-bar-1">
+
+
+                <app-admin-sidebar></app-admin-sidebar>
+
+            </div>
+
+            <div class="dashboard__main">
+                <div class="dashboard__content bg-light-2">
+                    <div class="row y-gap-20 justify-between items-end pb-20 lg:pb-40 md:pb-32">
+                        <div class="col-auto">
+
+                            <h1 class="text-25 lh-14 fw-600">India States</h1>
+
+                        </div>
+
+                        <div class="col-auto">
+
+                            <a class="button h-50 px-24 -dark-1 bg-blue-1 text-white" [routerLink]="['/admin/destinations/states/add']">
+                                Add State 
+                              </a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="py-30 px-30 rounded-4 bg-white shadow-3">
+                        <div class="row y-gap-30">
+                            <div class="overflow-scroll scroll-bar-1">
+                                <table class="table-3 -border-bottom col-12">
+                                    <thead class="bg-light-2">
+                                        <tr>
+                                            <th>Sr. No.</th>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th class="text-center">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr *ngFor="let item of destinations; index as i">
+                                            <td>{{i +1 }}</td>
+                                            <td><img [src]="env.host + env.filePath + item?.featuredImage" class="img-fluid"></td>
+                                            <td>{{item?.name }}</td>
+                                            <td>
+                                                <div class="row x-gap-10 y-gap-10 justify-end items-center md:justify-start">
+
+                                                    <div class="col-auto">
+                                                        <a [routerLink]="['/admin/destinations/states/edit', item?._id]" class="action-btn edit">
+                                                            <i class="fa fa-edit"></i>
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="col-auto">
+                                                        <a class="action-btn delete" (click)="deleteItem(item?._id)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+
+                                                    <div class="col-auto">
+                                                        <a class="action-btn view" target="_blank">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <app-admin-footer></app-admin-footer>
+                </div>
+            </div>
+        </div>
+
+
+
+    </router-outlet>
+</app-admin-layout>

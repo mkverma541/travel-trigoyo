@@ -1,0 +1,330 @@
+<app-user-layout>
+    <router-outlet>
+        <main>
+
+            <section class="section-bg layout-pt-lg layout-pb-md page-banner overlay" *ngIf="destination == null">
+                <div class="section-bg__item col-12">
+                    <img [src]="destinationDetails?.coverImage == null ? 'https://img.freepik.com/free-photo/beautiful-girl-standing-viewpoint-koh-nangyuan-island-near-koh-tao-island-surat-thani-thailand_335224-1094.jpg?w=1060&t=st=1677331235~exp=1677331835~hmac=66c3df77f4b5081f35e7584e0ceef2a2b42cc92bc9d6ea9b6b0107b81800c392' : env.host + env.filePath + destinationDetails?.coverImage"
+                        alt="image">
+                </div>
+                <div class="container">
+                    <div class="row justify-center text-center">
+                        <div class="col-xl-6 col-lg-8 col-md-10">
+                            <h1 class="text-40 md:text-25 fw-600 text-white mb-15">{{state}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="section-bg layout-pt-lg layout-pb-md page-banner overlay" *ngIf="destination !== null">
+                <div class="section-bg__item col-12">
+                    <img [src]="placeDetails?.coverImage == null ? 'https://img.freepik.com/free-photo/beautiful-girl-standing-viewpoint-koh-nangyuan-island-near-koh-tao-island-surat-thani-thailand_335224-1094.jpg?w=1060&t=st=1677331235~exp=1677331835~hmac=66c3df77f4b5081f35e7584e0ceef2a2b42cc92bc9d6ea9b6b0107b81800c392' : env.host + env.filePath + placeDetails?.coverImage"
+                        alt="image">
+                </div>
+                <div class="container">
+                    <div class="row justify-center text-center">
+                        <div class="col-xl-6 col-lg-8 col-md-10">
+                            <h1 class="text-40 md:text-25 fw-600 text-white mb-15">{{destination}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <app-page-nav></app-page-nav>
+
+            <!-- state destails-->
+
+            <section class="layout-pt-md layout-pb-md" *ngIf="destination == null">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="text-block">
+                                <div class="content" [class.active]="showContent">
+                                    <div [innerHTML]="stateDetails?.overview"></div>
+                                </div>
+                                <div class="read-more" (click)="toggleContent()">
+                                    {{showContent ? 'Read Less' : 'Read More'}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--destination details-->
+            <section class="layout-pt-md layout-pb-md" *ngIf="destination != null">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col">
+                            <div class="text-block">
+                                <div class="content" [class.active]="showContent">
+                                    <div [innerHTML]="placeDetails?.overview"></div>
+                                </div>
+                                <div class="read-more" (click)="toggleContent()">
+                                    {{showContent ? 'Read Less' : 'Read More'}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- state cities-->
+
+            <ng-container *ngIf="statesDestinations.length > 0">
+
+                <section class="layout-pt-md layout-pb-md" *ngIf="destination == null">
+                    <div class="container">
+                        <div class="row y-gap-20 justify-between items-end">
+                            <div class="col-auto">
+                                <div class="sectionTitle -md">
+                                    <h2 class="sectionTitle__title">{{state}} Places</h2>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row y-gap-30 pt-40 sm:pt-20">
+
+                            <div class="col-xl-3 col-lg-3 col-sm-6" *ngFor="let destination of statesDestinations">
+
+                                <a [routerLink]="['/india/state/', state, destination?.name]" c class="rentalCard -type-1 rounded-4 ">
+                                    <div class="rentalCard__image">
+
+                                        <div class="cardImage ratio ratio-1:1">
+                                            <div class="cardImage__content rounded-10">
+
+                                                <img class="rounded-4 col-12 js-lazy loaded" [src]="env.host + env.filePath + destination?.featuredImage" alt="image">
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="rentalCard__content mt-10">
+                                        <h4 class="rentalCard__title text-dark-1 text-18 lh-16 fw-500">
+                                            <span>{{destination?.name}}</span>
+                                        </h4>
+
+                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </ng-container>
+
+
+            <ng-container *ngIf="packageList.length > 0">
+                <section class="layout-pt layout-pb">
+                    <div class="container">
+                        <div class="row y-gap-20 justify-between items-end">
+                            <div class="col-auto">
+                                <div class="sectionTitle -md">
+                                    <h2 class="sectionTitle__title">{{state}} Tour Packages</h2>
+                                </div>
+                            </div>
+
+                            <div class="col-auto">
+
+                                <a [routerLink]="['/tour/packages']" class="button -md -blue-1 bg-blue-1-05 text-blue-1">
+                            More <div class="icon-arrow-top-right ml-15"></div>
+                          </a>
+
+                            </div>
+                        </div>
+
+                        <div class="row y-gap-30 pt-40 sm:pt-20">
+
+                            <div class="col-xl-3 col-lg-3 col-sm-6 mb-30" *ngFor="let package of packageList">
+
+                                <a [routerLink]="['/tour/package', package?._id]" class="rentalCard -type-1 rounded-4 ">
+                                    <div class="rentalCard__image">
+
+                                        <div class="cardImage ratio ratio-1:1">
+                                            <div class="cardImage__content">
+
+                                                <img class="rounded-20 col-12" [src]="env.host + env.filePath + package?.featuredImage" alt="image">
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="rentalCard__content mt-10">
+                                        <div class="text-14 text-light-1 lh-14 mb-5">{{package?.category?.name}}</div>
+
+                                        <h4 class="rentalCard__title text-dark-1 text-18 lh-16 fw-500">
+                                            <span>{{package?.packageName}}</span>
+                                        </h4>
+
+                                        <p class="text-light-1 lh-14 text-14 mt-5"></p>
+
+                                        <div class="d-flex items-center mt-5">
+                                            <div class="text-14 text-light-1">{{package?.tourNights}} Night/ 4 Days</div>
+                                        </div>
+
+                                        <div class="mt-5">
+                                            <div class="text-light-1">
+                                                <span class="fw-500 text-dark-1">₹ {{package?.price}}</span> / per adult
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            </ng-container>
+
+
+            <app-latest-blog-post></app-latest-blog-post>
+
+
+
+
+
+
+            <!-- <section class="layout-pt-sm layout-pb-lg">
+                <div class="container">
+                    <div class="row ">
+                        <div class="col-xl-3 col-lg-3 lg:d-none  mt-10">
+                            <aside class="sidebar y-gap-40">
+                                <div class="sidebar__item -no-border">
+                                    <h5 class="text-18 fw-500 mb-10">Destinations</h5>
+                                    <div class="sidebar-checkbox">
+                                        <div class="row y-gap-10 items-center justify-between" *ngFor="let d of destinations">
+                                            <div class="col-auto">
+                                                <div class="d-flex items-center">
+                                                    <div class="form-checkbox ">
+                                                        <input type="checkbox" name="name">
+                                                        <div class="form-checkbox__mark">
+                                                            <div class="form-checkbox__icon icon-check"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text-15 ml-10">{{d.name}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="sidebar__item">
+                                    <h5 class="text-18 fw-500 mb-10">Categories</h5>
+                                    <div class="sidebar-checkbox">
+
+                                        <div class="row y-gap-10 items-center justify-between" *ngFor="let category of tourCategories">
+                                            <div class="col-auto">
+
+                                                <div class="d-flex items-center">
+                                                    <div class="form-checkbox ">
+                                                        <input type="checkbox" name="name">
+                                                        <div class="form-checkbox__mark">
+                                                            <div class="form-checkbox__icon icon-check"></div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="text-15 ml-10">{{category?.name}}</div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+
+                        <div class="col-xl-9 col-lg-9">
+
+                            <div class="row y-gap-30">
+                                <div class="row tour-card-list" *ngFor="let item of packageList">
+                                    <div class="row x-gap-20 y-gap-20">
+
+                                        <div class="col-md-3">
+                                            <div class="cardImage ratio ratio-1:1 w-250 md:w-1/1 rounded-4">
+                                                <div class="cardImage__content">
+                                                    <img class="rounded-4 col-12 js-lazy" [src]="item?.featuredImage" alt="image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <h3 class="text-18 lh-16 fw-500">{{item?.packageName}}</h3>
+
+                                            <div class="row x-gap-30 items-center center">
+                                                <div class="col-auto">
+                                                    <p class="text-14">
+                                                        <span><img src="assets/img/icons/clock.png" class="img-fluid me-2" width="18px"></span> {{item.duration[0]}} Nights {{item.duration[1]}} Days
+                                                    </p>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <p class="text-14">
+                                                        <span><img src="assets/img/icons/pin.png" class="img-fluid me-2" width="18px"></span> {{item?.destination?.name}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="placeTimeline">
+                                                <div>
+                                                    <div *ngFor="let place of item?.travelDestinations">
+                                                        {{place}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-12 mt-10">Customized Holidays</div>
+                                            <div class="row x-gap-30 y-gap-10 ">
+                                                <div class="col-auto tour-inclusive">
+                                                    <div class="icon">
+                                                        <img src="assets/img/icons/sun.png" class="img-fluid w-20">
+                                                    </div>
+                                                    <div>Highlights</div>
+                                                </div>
+                                                <div class="col-auto tour-inclusive disabled">
+                                                    <div class="icon">
+                                                        <img src="assets/img/icons/flight.png" class="img-fluid w-20">
+                                                    </div>
+                                                    <div>Flight</div>
+                                                </div>
+                                                <div class="col-auto tour-inclusive">
+                                                    <div class="icon">
+                                                        <img src="assets/img/icons/hotel.png" class="img-fluid w-20">
+                                                    </div>
+                                                    <div>Hotels</div>
+                                                </div>
+                                                <div class="col-auto tour-inclusive">
+                                                    <div class="icon">
+                                                        <img src="assets/img/icons/camera.png" class="img-fluid w-20">
+                                                    </div>
+                                                    <div>Sightseeing</div>
+                                                </div>
+                                                <div class="col-auto tour-inclusive">
+                                                    <div class="icon">
+                                                        <img src="assets/img/icons/breakfast.png" class="img-fluid w-20">
+                                                    </div>
+                                                    <div>Meals</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 text-right md:text-left border-left-sep">
+                                            <div class="text-14 text-light-1 mt-50 md:mt-20">From</div>
+                                            <div class="text-22 lh-12 fw-600 mt-5">₹ {{item.price}}</div>
+                                            <div class="text-14 text-light-1 mt-5">starting price per adult</div>
+                                            <div class="btn-wrap">
+                                                <a [routerLink]="['/tour/package', item?._id]" class="button  -dark-1 bg-blue-1 text-white mt-24">View Detail</a>
+                                                <a class="button -outline-blue-1 text-blue-1 text-white mt-24" data-x-click="lang">Enquiry Now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section> -->

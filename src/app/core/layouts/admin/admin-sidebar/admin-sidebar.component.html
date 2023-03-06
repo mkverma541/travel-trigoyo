@@ -1,0 +1,85 @@
+<div class="sidebar -dashboard">
+
+    <div class="sidebar__item">
+        <div class="sidebar__button -is-active" [ngClass]="{'-is-active': activeRoute == 'dashboard'}">
+            <a [routerLink]="['/admin/dashboard']" class="d-flex items-center text-15 lh-1 fw-500">
+                <img src="assets/img/dashboard/sidebar/compass.svg" alt="image" class="mr-15"> Dashboard
+            </a>
+        </div>
+    </div>
+    <div class="sidebar__item">
+        <div class="sidebar__button -is-active" [ngClass]="{'-is-active': activeRoute == 'contact'}">
+            <a [routerLink]="['/admin/contact']" class="d-flex items-center text-15 lh-1 fw-500">
+                <img src="assets/img/dashboard/sidebar/compass.svg" alt="image" class="mr-15"> Enquiry
+            </a>
+        </div>
+    </div>
+
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <img src="assets/img/dashboard/sidebar/compass.svg" alt="image" class="mr-15"> Blogs
+            </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample" [ngClass]="{'show': activeRoute == 'list' }">
+                <div class="accordion-body">
+                    <ul>
+                        <li [routerLink]="['/admin/blogs']">List</li>
+                        <li [routerLink]="['/admin/blogs/categories']">Categories</li>
+                        <li [routerLink]="['/admin/blogs/tags']">Tags</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed show" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <img src="assets/img/dashboard/sidebar/compass.svg" alt="image" class="mr-15">  Tour
+            </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ul>
+                        <li [routerLink]="['/admin/tour-package']">Packages</li>
+                        <li [routerLink]="['/admin/tour-facilities']">Facilities</li>
+                        <li [routerLink]="['/admin/tour-categories']">Categories</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed show" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                <img src="assets/img/dashboard/sidebar/compass.svg" alt="image" class="mr-15">  Destinations
+        </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <ul>
+                    <li [routerLink]="['/admin/destinations/states']">States</li>
+                    <li [routerLink]="['/admin/destinations']">Destinations</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar__item">
+        <div class="sidebar__button ">
+            <a [routerLink]="['/admin/seo']" class="d-flex items-center text-15 lh-1 fw-500">
+                <img src="assets/img/dashboard/sidebar/log-out.svg" alt="image" class="mr-15"> Page SEO
+            </a>
+        </div>
+    </div>
+
+    <div class="sidebar__item">
+        <div class="sidebar__button ">
+            <a class="d-flex items-center text-15 lh-1 fw-500">
+                <img src="assets/img/dashboard/sidebar/log-out.svg" alt="image" class="mr-15"> Logout
+            </a>
+        </div>
+    </div>
+
+</div>
