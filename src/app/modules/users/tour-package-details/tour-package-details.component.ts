@@ -47,13 +47,14 @@ export class TourPackageDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.activateRoute.params.subscribe(res => {
-      let id = res['id'];
-      this.getPackageDetails(id)
+      let slug = res['slug'];
+      console.log(slug)
+      this.getPackageDetails(slug)
     })    
   }
 
-  getPackageDetails(id:string){
-    this.userService.tourPackagesDetails(id).subscribe(res => {
+  getPackageDetails(slug:string){
+    this.userService.tourPackagesDetailsBySlug(slug).subscribe(res => {
       this.packageDetails = res.data;
       console.log(this.packageDetails)
     })

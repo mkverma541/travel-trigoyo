@@ -16,6 +16,7 @@ export const urls = {
     blogsTags: '/api/blogs/tags',
     blogsCategory: '/api/blogs/articles/category/',
     tourPackage: '/api/tour/package',
+    tourPackageBySlug: '/api/tour/package/slug/',
     tourDestinations: '/api/destinations',
     tourDestinationDetails: '/api/destinations/view/',
     tourCategories: '/api/tour/categories',

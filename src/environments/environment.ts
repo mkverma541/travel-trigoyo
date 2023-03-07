@@ -5,8 +5,8 @@ import { urls } from "./url";
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
   production: false,
-  host: 'https://api.trigoyo.com',
-//  host: 'http://localhost:3000',
+//  host: 'https://api.trigoyo.com',
+  host: 'http://localhost:3000',
   ...urls
 };
 

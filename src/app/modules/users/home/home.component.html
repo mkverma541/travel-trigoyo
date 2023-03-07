@@ -94,7 +94,7 @@
                     <div class="pt-40 overflow-hidden row">
                         <owl-carousel-o [options]="customOptions">
                             <ng-template carouselSlide *ngFor="let package of tourPackageArr">
-                                <a class="citiesCard -type-2 " [routerLink]="['/tour/package', package?._id]">
+                                <a class="citiesCard -type-2 " [routerLink]="['/tour/package', package.slug]">
                                     <div class="citiesCard__image rounded-20 ratio ratio-3:4">
                                         <img class="img-ratio rounded-20 js-lazy" [src]="env.host + env.filePath +  package?.featuredImage" alt="image">
                                     </div>
@@ -132,7 +132,7 @@
                     <div class="pt-40 overflow-hidden row">
                         <owl-carousel-o [options]="customOptions">
                             <ng-template carouselSlide *ngFor="let package of andamanTourPackages">
-                                <a [routerLink]="['/tour/package', package?._id]" class="citiesCard -type-2 ">
+                                <a [routerLink]="['/tour/package', package.slug]" class="citiesCard -type-2 ">
                                     <div class="citiesCard__image rounded-20 ratio ratio-3:4">
                                         <img class="img-ratio rounded-20 js-lazy" [src]="env.host + env.filePath +  package.featuredImage" alt="image">
                                     </div>

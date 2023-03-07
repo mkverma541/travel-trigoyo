@@ -40,7 +40,7 @@ const routes: Routes = [
         path: 'packages', component: TourPackagesComponent
       },
       {
-        path: 'package/:id', component: TourPackageDetailsComponent
+        path: 'package/:slug', component: TourPackageDetailsComponent
       }
       // {
       //   path: 'packages/destinations/:id', component: TourPackagesDestinationsComponent 

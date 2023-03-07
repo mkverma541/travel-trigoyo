@@ -252,6 +252,18 @@ export class UsersService {
     );
   }
 
+
+  tourPackagesDetailsBySlug(slug:string): Observable<any> {
+    const href = `${environment.tourPackageBySlug}`;
+    return this.http.get<any>(href + slug).pipe(
+      map((data: any) => {
+        if (data.status === "success") {
+          return data.data;
+        }
+      })
+    );
+  }
+
   tourPackagesDetails(id:string): Observable<any> {
     const href = `${environment.tourPackage}`;
     return this.http.get<any>(href + '/' + id).pipe(
