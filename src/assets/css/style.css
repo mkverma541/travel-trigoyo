@@ -94,8 +94,20 @@ header .navbar-toggler {
   border-radius: 50%;
 }
 
-.owl-nav .owl-prev,
-.owl-nav .owl-next {
+.form-group {
+  margin-top: 20px;
+}
+.form-group input,
+.form-group textarea {
+  font-size: 13px;
+}
+
+.modal-content {
+  padding: 10px;
+}
+
+.owl-theme .owl-nav .owl-prev,
+.owl-theme .owl-nav .owl-next {
   width: 40px;
   height: 40px;
   border-radius: 50% !important;
@@ -107,12 +119,14 @@ header .navbar-toggler {
   top: 50%;
   left: 10px;
   transform: translateY(-50%);
+  margin-top: 13%;
+  margin-left: 0px;
 }
-.owl-nav .owl-prev i,
-.owl-nav .owl-next i {
+.owl-theme .owl-nav .owl-prev i,
+.owl-theme .owl-nav .owl-next i {
   color: var(--primary-color) !important;
 }
-.owl-nav .owl-next {
+.owl-theme .owl-nav .owl-next {
   right: 10px;
   left: auto;
 }

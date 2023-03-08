@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { HelperService } from 'src/app/core/services/helper.service';
 import { UsersService } from 'src/app/core/services/users';
 import { environment } from 'src/environments/environment';
 
@@ -18,7 +19,7 @@ export class SingleBlogPostComponent implements OnInit, OnDestroy {
   relatedPosts: any;
   env = environment;
 
-  constructor(private userService: UsersService, private activateRoute : ActivatedRoute) { }
+  constructor(private userService: UsersService, private activateRoute : ActivatedRoute, private helperService: HelperService) { }
  
   ngOnInit() {
     this.activateRoute.params.subscribe(res => {
@@ -35,6 +36,8 @@ export class SingleBlogPostComponent implements OnInit, OnDestroy {
   getBlogDetails(slug:string){
     this.userService.getBlogDetailsBySlug(slug).subscribe(res => {
       this.blogDetails = res.data;
+      let data = res.data;
+      this.helperService.setPageSeo(data.seo?.title, data.seo?.description, data.seo?.keywords)
       console.log(this.blogDetails)
     })
   }

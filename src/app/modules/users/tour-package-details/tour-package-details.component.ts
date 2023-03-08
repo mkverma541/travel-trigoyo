@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { UsersService } from 'src/app/core/services/users';
 import { environment } from 'src/environments/environment';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { HelperService } from 'src/app/core/services/helper.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-tour-package-details',
@@ -39,11 +41,11 @@ export class TourPackageDetailsComponent implements OnInit {
     },
     nav: true
   }
-
   
   packageDetails : any;
-
-  constructor(private activateRoute: ActivatedRoute, private userService: UsersService) { }
+  private subscription = new Subscription;
+  
+  constructor(private activateRoute: ActivatedRoute, private userService: UsersService, private helperService: HelperService) { }
 
   ngOnInit() {
     this.activateRoute.params.subscribe(res => {
@@ -54,12 +56,12 @@ export class TourPackageDetailsComponent implements OnInit {
   }
 
   getPackageDetails(slug:string){
-    this.userService.tourPackagesDetailsBySlug(slug).subscribe(res => {
+  this.subscription =  this.userService.tourPackagesDetailsBySlug(slug).subscribe(res => {
       this.packageDetails = res.data;
+      let data = res.data;
+      this.helperService.setPageSeo(data.seo?.title, data.seo?.description, data.seo?.keywords)
       console.log(this.packageDetails)
     })
   }
-
-
 
 }

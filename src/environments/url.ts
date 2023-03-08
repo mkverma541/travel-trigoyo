@@ -28,9 +28,9 @@ export const urls = {
     destinationsState: '/api/india/states/list/', // all states list
     stateDetails: '/api/india/states/view/', // states details instead of id
     topStateList: '/api/india/states/top-5',
-    topPackageList: '/api/tour/package/top-5',
-    pageMetaTags: '/api/meta',
-    
+    top5PackageList: '/api/tour/package/top-5',
+    metaTagsList: '/api/meta',
+    pageMetaTags: '/api/meta/page/',
   }
   
   

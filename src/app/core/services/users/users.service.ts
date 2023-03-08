@@ -573,8 +573,8 @@ tourCategoriesDelete(id:string): Observable<any> {
   }
 
   
-  topTourPackageList(): Observable<any>{
-    const href = `${environment.topPackageList}`;
+  top5TourPackageList(): Observable<any>{
+    const href = `${environment.top5PackageList}`;
     return this.http.get<any>(href).pipe(
       map((data: any) => {
         if (data.status === "success") {
@@ -585,21 +585,11 @@ tourCategoriesDelete(id:string): Observable<any> {
   }
 
 
-  metaTags(): Observable<any>{
-    const href = `${environment.pageMetaTags}`;
-    return this.http.get<any>(href).pipe(
-      map((data: any) => {
-        if (data.status === "success") {
-          return data.data;
-        }
-      })
-    ); 
-  }
-
+  
 
   getMetaTags(page:string): Observable<any>{
     const href = `${environment.pageMetaTags}`;
-    return this.http.get<any>(`${href}/${page}`).pipe(
+    return this.http.get<any>(`${href}${page}`).pipe(
       map((data: any) => {
         if (data.status === "success") {
           return data.data;

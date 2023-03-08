@@ -18,7 +18,7 @@ export class TourPackagesDestinationsComponent implements OnInit, OnDestroy {
   destinationId!: string;
   destinationDetails: any;
   env = environment;
-  statesDestinations !: any[];
+  statesDestinations : any = [];
   state = null;
   stateDetails: any = null;
   showContent: boolean = false;
@@ -104,7 +104,7 @@ export class TourPackagesDestinationsComponent implements OnInit, OnDestroy {
   getPackageList1(state:string){
     this.subscription =  this.userService.tourPackagesByState(state).subscribe(res => {
       this.packageList = res.data;
-      console.log(this.packageList)
+      console.log(this.packageList, '107')
     })
   }
 

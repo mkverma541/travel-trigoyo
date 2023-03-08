@@ -52,7 +52,7 @@ const routes: Routes = [
   //   component: BlogsPostCategoriesComponent
   // },
   {
-    path: 'contact',
+    path: 'contact-us',
     component: ContactComponent
   },
   {

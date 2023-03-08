@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UsersService } from 'src/app/core/services/users/users.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class UserFooterComponent implements OnInit {
   stateList : any[] = [];
   tourPackageArr : any[] = [];
   andamanTourPackages= [];
+  private subscription = new Subscription;
 
   constructor(private userService: UsersService) { }
 
@@ -23,23 +25,23 @@ export class UserFooterComponent implements OnInit {
   }
 
   getStateList(){
-    this.userService.topStateList().subscribe(res => {
+   this.subscription = this.userService.topStateList().subscribe(res => {
       this.stateList = res.data;
-      console.log(res)
+      console.log(res, 'states')
     })
   }
 
   getTourPackageList(){
-    this.userService.topTourPackageList().subscribe(res => {
+  this.subscription =  this.userService.top5TourPackageList().subscribe(res => {
       this.tourPackageArr = res.data;
-      console.log(res)
+      console.log(res, 'tour packages')
     })
   }
 
   getAndamanTourPackage(state:string){
-    this.userService.tourPackagesByState(state).subscribe(res => {
+  this.subscription =  this.userService.tourPackagesByState(state).subscribe(res => {
       this.andamanTourPackages = res.data;
-      console.log(res, 'aa')
+      console.log(res, 'andman tour package')
     })
   }
 

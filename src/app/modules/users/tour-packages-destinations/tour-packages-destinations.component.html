@@ -74,7 +74,7 @@
 
             <ng-container *ngIf="statesDestinations.length > 0">
 
-                <section class="layout-pt-md layout-pb-md" *ngIf="destination == null">
+                <section class="layout-pt layout-pb-md" *ngIf="destination == null">
                     <div class="container">
                         <div class="row y-gap-20 justify-between items-end">
                             <div class="col-auto">
@@ -87,7 +87,7 @@
 
                         <div class="row y-gap-30 pt-40 sm:pt-20">
 
-                            <div class="col-xl-3 col-lg-3 col-sm-6" *ngFor="let destination of statesDestinations">
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let destination of statesDestinations">
 
                                 <a [routerLink]="['/india/state/', state, destination?.name]" c class="rentalCard -type-1 rounded-4 ">
                                     <div class="rentalCard__image">
@@ -118,6 +118,8 @@
             </ng-container>
 
 
+
+
             <ng-container *ngIf="packageList.length > 0">
                 <section class="layout-pt layout-pb">
                     <div class="container">
@@ -137,48 +139,52 @@
                             </div>
                         </div>
 
-                        <div class="row y-gap-30 pt-40 sm:pt-20">
 
-                            <div class="col-xl-3 col-lg-3 col-sm-6 mb-30" *ngFor="let package of packageList">
-
-                                <a [routerLink]="['/tour/package', package.slug]" class="rentalCard -type-1 rounded-4 ">
-                                    <div class="rentalCard__image">
-
-                                        <div class="cardImage ratio ratio-1:1">
-                                            <div class="cardImage__content">
-
-                                                <img class="rounded-20 col-12" [src]="env.host + env.filePath + package?.featuredImage" alt="image">
-
-                                            </div>
-
-                                        </div>
-
+                        <div class="row x-gap-20 y-gap-20 tour-card-list" *ngFor="let item of packageList">
+                            <div class="col-md-3">
+                                <div class="cardImage ratio ratio-1:1 w-250 md:w-1/1 rounded-4">
+                                    <div class="cardImage__content">
+                                        <img class="rounded-4 col-12 js-lazy" [src]="env.host + env.filePath +  item.featuredImage" alt="image">
                                     </div>
-
-                                    <div class="rentalCard__content mt-10">
-                                        <div class="text-14 text-light-1 lh-14 mb-5">{{package?.category?.name}}</div>
-
-                                        <h4 class="rentalCard__title text-dark-1 text-18 lh-16 fw-500">
-                                            <span>{{package?.packageName}}</span>
-                                        </h4>
-
-                                        <p class="text-light-1 lh-14 text-14 mt-5"></p>
-
-                                        <div class="d-flex items-center mt-5">
-                                            <div class="text-14 text-light-1">{{package?.tourNights}} Night/ 4 Days</div>
-                                        </div>
-
-                                        <div class="mt-5">
-                                            <div class="text-light-1">
-                                                <span class="fw-500 text-dark-1">₹ {{package?.price}}</span> / per adult
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-
+                                </div>
                             </div>
+                            <div class="col-md-6">
+                                <h3 class="text-18 lh-16 fw-500">{{item?.packageName}}</h3>
 
+                                <div class="row x-gap-30 items-center center">
+                                    <div class="col-auto">
+                                        <p class="text-14">
+                                            <span><img src="assets/img/icons/clock.png" class="img-fluid me-2" width="18px"></span> {{item.tourNights}} Nights {{item.tourDays}} Days
+                                        </p>
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="text-14">
+                                            <span><img src="assets/img/icons/pin.png" class="img-fluid me-2" width="18px"></span> {{item?.destination?.name}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="text-12 mt-10">Customized Holidays</div>
+                                <div class="row x-gap-30 y-gap-10 ">
+                                    <div class="col-auto tour-inclusive" *ngFor="let option of item?.facilities">
+                                        <div class="icon">
+                                            <img [src]="env.host + env.filePath + option?.icon" class="img-fluid w-20">
+                                        </div>
+                                        <div>{{option?.name}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 text-right md:text-left border-left-sep">
+                                <div class="text-14 text-light-1 mt-50 md:mt-20">From</div>
+                                <div class="text-22 lh-12 fw-600 mt-5">₹ {{item?.price}}</div>
+                                <div class="text-14 text-light-1 mt-5">starting price per adult</div>
+                                <div class="btn-wrap">
+                                    <a [routerLink]="['/tour/package', item.slug]" class="button  -dark-1 bg-blue-1 text-white mt-24">View Detail</a>
+                                    <a class="button -outline-blue-1 text-blue-1 mt-24" data-bs-toggle="modal" data-bs-target="#enquiryModal">Enquiry Now</a>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </section>
             </ng-container>

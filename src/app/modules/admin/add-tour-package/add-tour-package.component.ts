@@ -22,7 +22,7 @@ export class AddTourPackageComponent implements OnInit {
   selectedFile: any = null;
   env = environment;
   selectedFile2: any;
-  galleryImages : any;
+  galleryImages : any = [];
   destinations : any;
   isEdit = false;
   packageId !: string;
@@ -52,6 +52,7 @@ export class AddTourPackageComponent implements OnInit {
   ngOnInit() {
     this.getPackageId();
     this.initForm();
+    this.setSlug();
     this.getAllStates();
     this.getTourCategories();
     this.getTourDestinations();
@@ -78,6 +79,22 @@ export class AddTourPackageComponent implements OnInit {
     })
   }
 
+  setSlug(){
+    console.log(this.addPackageForm.controls)
+      this.addPackageForm.controls['packageName'].valueChanges.subscribe((value:string) => {
+        this.addPackageForm.controls['slug'].setValue(this.createSlug(value))
+        this.addPackageForm.get('seo.title')?.setValue(value);
+        console.log(this.addPackageForm.controls)
+      })
+  }
+
+  createSlug(title: string):string{
+    let slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    slug = slug.replace(/^-|-$/g, ''); 
+    return slug;
+  }
+
+
   getAllStates(){
     this.userService.getAllStates().subscribe(res => {
       this.states = res.data;
@@ -91,6 +108,7 @@ export class AddTourPackageComponent implements OnInit {
       packageName: [null, Validators.required],
       price: [null, Validators.required],
       tourDays: [null, Validators.required],
+      slug:[''],
       tourNights: [null, Validators.required],
       destination: [null, Validators.required],
       state: [null, Validators.required],
@@ -104,7 +122,12 @@ export class AddTourPackageComponent implements OnInit {
       importantNotes:  [null],
       featuredImage: [this.featuredImage],
       gallery: [this.galleryImages],
-      extras: [null]
+      extras: [null],
+      seo: this.fb.group({
+        title: '',
+        description: '',
+        keywords:''
+      })
     })
   }
 
@@ -151,6 +174,7 @@ export class AddTourPackageComponent implements OnInit {
       packageName: data.packageName,
       price: data.price,
       tourDays: data.tourDays,
+      slug: data.slug,
       tourNights: data.tourNights,
       destination: data.destination,
       categories: data.categories,
@@ -162,7 +186,12 @@ export class AddTourPackageComponent implements OnInit {
       importantNotes:  data.importantNotes,
       featuredImage: data.featuredImage,
       gallery: data.gallery,
-      extras: data.extras 
+      extras: data.extras, 
+      seo : {
+        title: data.seo?.title,
+        description: data.seo?.description,
+        keywords: data.seo?.keywords
+      }
       });
       this.featuredImage =  data.featuredImage;
       this.galleryImages = data.gallery;

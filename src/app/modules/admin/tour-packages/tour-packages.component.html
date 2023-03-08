@@ -49,6 +49,7 @@
                                                         <th>Package Name</th>
                                                         <th>State</th>
                                                         <th>Destination</th>
+                                                        <th>Meta Tags</th>
                                                         <th>Date</th>
                                                         <th class="text-center">Action</th>
                                                     </tr>
@@ -61,6 +62,11 @@
                                                         <td>{{item?.packageName}}</td>
                                                         <td>{{item?.state?.name }}</td>
                                                         <td>{{item?.destination?.name}}</td>
+                                                        <td style="min-width: 400px;">
+                                                            <p>Title : {{item.seo?.title}}</p>
+                                                            <p>Description : {{item.seo?.description}}</p>
+                                                            <p>Keywords : {{item.seo?.keywords}}</p>
+                                                        </td>
                                                         <td>{{item?.createdAt | date : 'dd/MM/yyyy'}}</td>
                                                         <td>
                                                             <div class="d-flex">

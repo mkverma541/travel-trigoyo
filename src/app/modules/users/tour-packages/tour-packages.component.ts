@@ -13,11 +13,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./tour-packages.component.css']
 })
 export class TourPackagesComponent implements OnInit {
-  meta = {
-    title: 'Tour Packages',
-    description: 'Tour package page description',
-    keywords: 'Khandar tour package'
-  }
+
   packageList!: any[];
   // destinations: [];
   tourCategories!: [];

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { HelperService } from 'src/app/core/services/helper.service';
 import { UsersService } from 'src/app/core/services/users';
 import { environment } from 'src/environments/environment';
@@ -19,6 +20,8 @@ export class BlogPostComponent implements OnInit {
   postList!: any[];
   categories!: any[];
   env = environment;
+  recentPosts : any;
+  private subscription = new Subscription;
 
   constructor(private userService: UsersService, private route: ActivatedRoute, private helperService: HelperService ) { }
 
@@ -26,6 +29,7 @@ export class BlogPostComponent implements OnInit {
     this.getMetaTags();
     this.getBlogsList();
     this.getBlogsCategories();
+    this.getRecentBlogList();
   }
   
   getMetaTags(){
@@ -33,8 +37,9 @@ export class BlogPostComponent implements OnInit {
     const pageName = url[0].path;
     console.log(pageName)
 
-    this.userService.getMetaTags(pageName).subscribe(res => {
-      let data = res.data[0];
+  this.subscription =  this.userService.getMetaTags(pageName).subscribe(res => {
+    console.log(res, 'meta')
+      let data = res.data;
       const title = data['title'];
       const description = data['description'];
       const keywords= data['keywords'];
@@ -44,17 +49,23 @@ export class BlogPostComponent implements OnInit {
 
 
   getBlogsList(){
-    this.userService.blogPostsList().subscribe(res =>{
+    this.subscription =  this.userService.blogPostsList().subscribe(res =>{
       this.postList = res.data;
-      console.log(this.postList)
+      console.log(this.postList, 'post')
     })
   }
 
   getBlogsCategories(){
-    this.userService.blogCategoriesList().subscribe(res => {
-      console.log(res.data)
+    this.subscription =  this.userService.blogCategoriesList().subscribe(res => {
+      console.log(res.data, 'categories')
       this.categories = res.data;
-      console.log(this.categories)
+    })
+  }
+
+  getRecentBlogList(){
+    this.subscription = this.userService.recentBlogPosts().subscribe(res => {
+      this.recentPosts = res.data;
+      console.log(res, 'recent ')
     })
   }
 

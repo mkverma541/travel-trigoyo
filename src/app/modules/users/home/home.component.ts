@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   AndamanDestination = 'Andaman';
   stateList !:any[];
   tourPackageArr !:any[];
+  private subscription  = new Subscription;
   
   meta = {
     title: 'Home',
@@ -29,7 +30,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     keywords: 'Chardham tour package'
   }
 
-  private subscription = new Subscription;
 
   customOptions: OwlOptions = {
     loop: true,
@@ -64,17 +64,19 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.getMetaTags();
     this.getStateList();
     this.getTourPackageList();
-    this.userService.setCurrentPage('home');
-    this.getCurrentPage();
     this.getAndamanTourPackage('Andaman and Nicobar Islands');
   }
 
   getMetaTags(){
     const url = this.route.snapshot.url;
     const pageName = url[0].path;
-
-    this.userService.getMetaTags(pageName).subscribe(res => {
-      let data = res.data[0];
+    console.log(pageName)
+    this.userService.setCurrentPage(pageName);
+    
+    this.subscription= this.userService.getMetaTags(pageName).subscribe(res => {
+      console.log(res)
+      let data = res.data;
+      console.log(data, 'meta')
       const title = data['title'];
       const description = data['description'];
       const keywords= data['keywords'];
@@ -82,33 +84,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   }
   
-  getCurrentPage(){
-    this.userService.getCurrentPage().subscribe(res => {
-      console.log(res)
-    })    
-  }
-
   getStateList(){
-    this.userService.topStateList().subscribe(res => {
+  this.subscription = this.userService.topStateList().subscribe(res => {
       this.stateList = res.data;
-      console.log(res)
+      console.log(res, 'states')
     })
   }
 
   getTourPackageList(){
-    this.userService.topTourPackageList().subscribe(res => {
+    this.subscription = this.userService.top5TourPackageList().subscribe(res => {
       this.tourPackageArr = res.data;
-      console.log(res)
+      console.log(res, 'packages')
     })
   }
 
   getAndamanTourPackage(state:string){
-    this.userService.tourPackagesByState(state).subscribe(res => {
+    this.subscription = this.userService.tourPackagesByState(state).subscribe(res => {
       this.andamanTourPackages = res.data;
-      console.log(res, 'aa')
+      console.log(res, 'andaman package')
     })
   }
-
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

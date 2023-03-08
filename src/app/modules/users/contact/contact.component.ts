@@ -28,7 +28,7 @@ export class ContactComponent implements OnInit {
     console.log(pageName)
 
     this.userService.getMetaTags(pageName).subscribe(res => {
-      let data = res.data[0];
+      let data = res.data;
       const title = data['title'];
       const description = data['description'];
       const keywords= data['keywords'];

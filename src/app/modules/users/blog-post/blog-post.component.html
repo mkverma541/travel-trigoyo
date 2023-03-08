@@ -97,12 +97,12 @@
 
                                     <div class="row y-gap-20 pt-10">
 
-                                        <div class="col-12" [routerLink]="['/blog', item.slug]" *ngFor="let item of postList">
+                                        <div class="col-12" [routerLink]="['/blogs', post.slug]" *ngFor="let post of recentPosts">
                                             <div class="d-flex items-center">
-                                                <img class="size-65 rounded-8" [src]="env.host + env.filePath + item.featuredImage" alt="image">
+                                                <img class="size-65 rounded-8" [src]="env.host + env.filePath + post.featuredImage" alt="image">
                                                 <div class="ml-15">
-                                                    <h5 class="text-15 lh-15 fw-500">{{item.title}}</h5>
-                                                    <div class="text-13 lh-1 mt-5">{{item.createdAt | date : 'medium'}}</div>
+                                                    <h5 class="text-15 lh-15 fw-500">{{post.title}}</h5>
+                                                    <div class="text-13 lh-1 mt-5">{{post.createdAt | date : 'medium'}}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,15 +117,15 @@
                                     <div class="row x-gap-10 y-gap-10 pt-10">
 
                                         <div class="col-auto">
-                                            <a href="#" class="button -blue-1 py-5 px-20 bg-blue-1-05 rounded-100 text-15 fw-500 text-blue-1">Museum</a>
+                                            <a class="button -blue-1 py-5 px-20 bg-blue-1-05 rounded-100 text-15 fw-500 text-blue-1">Museum</a>
                                         </div>
 
                                         <div class="col-auto">
-                                            <a href="#" class="button -blue-1 py-5 px-20 bg-blue-1-05 rounded-100 text-15 fw-500 text-blue-1">Park</a>
+                                            <a class="button -blue-1 py-5 px-20 bg-blue-1-05 rounded-100 text-15 fw-500 text-blue-1">Park</a>
                                         </div>
 
                                         <div class="col-auto">
-                                            <a href="#" class="button -blue-1 py-5 px-20 bg-blue-1-05 rounded-100 text-15 fw-500 text-blue-1">Beach</a>
+                                            <a class="button -blue-1 py-5 px-20 bg-blue-1-05 rounded-100 text-15 fw-500 text-blue-1">Beach</a>
                                         </div>
 
                                     </div>
